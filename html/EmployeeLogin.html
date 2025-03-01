@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login</title>
+    <link rel="stylesheet" href="../css/EmployeeLogin.css">
+</head>
+
+<body>
+    <div class="container" id="loginForm">
+        <h2>Employee Login</h2>
+        <form onsubmit="login(event)" class="grid-form"> 
+
+            <div class="grid-full">
+                <label for="empId">Employee ID</label>
+                <input type="text" id="empId" required>
+            </div>
+
+            <div class="grid-full">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <p class="error" id="errorMessage"></p>
+            <p class="success" id="successMessage"></p>
+
+            <button type="submit" class="grid-full" onclick="window.location.href='Home.html'">Login</button>
+        </form>
+
+        <div class="register">
+            <p>Don't have an account? <a href="EmployeeRegistration.html">Register here</a></p>
+        </div>
+    </div>
+
+    <!-- Acknowledgment Screen -->
+
+    <div class="success-card" id="acknowledgmentScreen" style="display: none;" >
+        <div class="icon">
+            <span>✔</span>
+        </div>
+        <h2>Employee Login Successful</h2>
+    </div>
+
+
+    <script>
+        function login(event) {
+            event.preventDefault();
+    
+            const empId = document.getElementById('empId').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+    
+            errorMessage.textContent = "";
+            successMessage.textContent = "";
+
+    
+            // Validate Employee ID format (7-digit auto-generated ID)
+            const empIdPattern = /^EMP\d{4}$/;
+            if (!empIdPattern.test(empId)) {
+                errorMessage.textContent = "Invalid Employee ID format. Example: EMP1234";
+                return;
+            }
+    
+            // Validate password length
+            if (password.length < 6) {
+                errorMessage.textContent = "Password must be at least 6 characters.";
+                return;
+            }
+    
+            successMessage.textContent = "Login successful!";
+    
+            // Redirect to home page after 2 seconds
+            // setTimeout(() => {
+            //     window.location.href = "home.html"; // Change to your actual home page
+            // }, 2000);
+        }
+    </script>
+    
+</body>
+
+</html>
