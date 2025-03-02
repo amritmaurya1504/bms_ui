@@ -76,7 +76,7 @@ label {
 button {
     width: 100%;
     padding: 12px;
-    background: #1a1a1a;
+    background: blue;
     color: white;
     border: none;
     border-radius: 5px;
@@ -87,7 +87,7 @@ button {
 }
 
 button:hover {
-    background: #464646;
+    background: rgb(99, 99, 251);
 }
 
 #successMessage {
