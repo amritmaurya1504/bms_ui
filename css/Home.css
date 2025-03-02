@@ -17,7 +17,7 @@ body {
 .sidebar {
     width: 270px;
     height: 100%;
-    background: #1a1a1a;
+    background: oklch(0.379 0.146 265.522);
     color: white;
     padding: 20px;
     position: fixed;
@@ -29,10 +29,11 @@ body {
 }
 
 .sidebar .active{
-    background-color: #585858;
+    background-color: oklch(0.282 0.091 267.935);
     padding: 8px;
     border-radius: 4px;
 }
+
 
 .logo {
     font-size: 22px;
@@ -62,7 +63,7 @@ body {
 }
 
 .sidebar ul li:hover {
-    background: #585858;
+    background: oklch(0.398 0.195 277.366);
 }
 
 /* Main Content */
