@@ -145,3 +145,11 @@ tr:hover {
     background: #ecf0f1;
 }
 
+.status{
+    font-size: 14px;
+    background-color: green;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Processing</title>
+    <link rel="stylesheet" href="../css/Transaction.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">Bank Management System</div>
+        <hr />
+        <ul>
+            <li><a href="Home.html">Dashboard</a></li>
+            <li><a href="Customer.html">Customer Management</a></li>
+            <li><a href="Transaction.html" class="active">Transactions</a></li>
+            <li><a href="Loan.html">Loan Management</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Transaction Management</h1>
+
+        <!-- Buttons for toggling views -->
+        <div class="button-container">
+            <button id="viewTransactionsBtn" style="display: none;">View Transactions</button>
+            <button id="addTransactionBtn">Capture New Transaction</button>
+        </div>
+
+        <!-- Transaction List -->
+        <div class="transaction-list" id="transactionsList">
+            <h2>Captured Transactions</h2>
+            <table>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>SSN ID</th>
+                    <th>Customer Name</th>
+                    <th>Account No</th>
+                    <th>Aadhaar</th>
+                    <th>PAN</th>
+                    <th>Address</th>
+                    <th>Date</th>
+                    <th>Contact No</th>
+                </tr>
+                <tr>
+                    <td>TXN12345</td>
+                    <td>987654321</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>1234-5678-9012</td>
+                    <td>ABCDE1234F</td>
+                    <td>New York, USA</td>
+                    <td>2025-02-29</td>
+                    <td>9876543210</td>
+                </tr>
+                <tr>
+                    <td>TXN12345</td>
+                    <td>987654321</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>1234-5678-9012</td>
+                    <td>ABCDE1234F</td>
+                    <td>New York, USA</td>
+                    <td>2025-02-29</td>
+                    <td>9876543210</td>
+                </tr>
+                <tr>
+                    <td>TXN12345</td>
+                    <td>987654321</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>1234-5678-9012</td>
+                    <td>ABCDE1234F</td>
+                    <td>New York, USA</td>
+                    <td>2025-02-29</td>
+                    <td>9876543210</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Transaction Form (Initially Hidden) -->
+        <div class="transaction-form" id="transactionFormContainer" style="display: none;">
+            <h2>Capture New Transaction</h2>
+            <form id="transaction-orm" class="grid-form">
+
+                <div class="grid-item">
+                    <label for="ssn">Customer SSN ID:</label>
+                    <input type="text" id="ssn" required>
+                </div>
+                <div class="grid-item">
+                    <label for="name">Customer Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="grid-item">
+                    <label for="account">Account Number:</label>
+                    <input type="text" id="account" required>
+                </div>
+                <div class="grid-item">
+                    <label for="aadhaar">Aadhaar Card No.:</label>
+                    <input type="text" id="aadhaar" required>
+                </div>
+                <div class="grid-item">
+                    <label for="pan">PAN Card No.:</label>
+                    <input type="text" id="pan" required>
+                </div>
+                <div class="grid-item">
+                    <label for="contact">Contact Number:</label>
+                    <input type="text" id="contact" required>
+                </div>
+                <div class="grid-full">
+                    <label for="address">Address</label>
+                    <textarea id="address" placeholder="Street, City, etc." maxlength="100" required></textarea>
+                </div>
+                <div class="grid-item">
+                    <label for="date">Transaction Date:</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="grid-item">
+                    <label for="mode">Mode of Transaction</label>
+                    <select id="mode" required>
+                        <option value="">Select Mode</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Cheque">Cheque</option>
+                        <option value="Online Transfer">Online Transfer</option>
+                        <option value="UPI">UPI</option>
+                        <option value="NEFT">NEFT</option>
+                        <option value="RTGS">RTGS</option>
+                    </select>
+                </div>
+
+                <div class="grid-item">
+                    <label for="amount">Amount</label>
+                    <input type="text" id="amount" required>
+                </div>
+
+                <div class="grid-item">
+                    <label for="type">Type of Transaction</label>
+                    <select id="type" required>
+                        <option value="">Select Type</option>
+                        <option value="Credit">Credit</option>
+                        <option value="Debit">Debit</option>
+                    </select>
+                </div>
+
+                <button type="submit">Capture Transaction</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("addTransactionBtn").addEventListener("click", function () {
+            document.getElementById("transactionFormContainer").style.display = "block";
+            document.getElementById("transactionsList").style.display = "none";
+            document.getElementById("addTransactionBtn").style.display = "none";
+            document.getElementById("viewTransactionsBtn").style.display = "inline-block";
+        });
+
+        document.getElementById("viewTransactionsBtn").addEventListener("click", function () {
+            document.getElementById("transactionFormContainer").style.display = "none";
+            document.getElementById("transactionsList").style.display = "block";
+            document.getElementById("addTransactionBtn").style.display = "inline-block";
+            document.getElementById("viewTransactionsBtn").style.display = "none";
+        });
+
+        document.getElementById("transactionForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            alert("Transaction Captured Successfully!");
+        });
+    </script>
+</body>
+
+</html>
