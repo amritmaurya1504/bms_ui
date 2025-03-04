@@ -131,7 +131,28 @@
 
 
             // Generate a random Employee ID
-            const employeeId = 'EMP' + Math.floor(1000 + Math.random() * 9000);
+            const employeeId = Date.now().toString().slice(-6);
+
+            // Create employee object
+            const employeeData = {
+                employeeId,
+                firstName,
+                lastName,
+                email,
+                contactNumber,
+                address,
+                password // Store passwords securely in a real application (e.g., hashing)
+            };
+
+            // Retrieve existing employees from localStorage, or initialize an empty array
+            let employees = JSON.parse(localStorage.getItem('employees')) || [];
+
+            // Add the new employee to the array
+            employees.push(employeeData);
+
+            // Store the updated array back in localStorage
+            localStorage.setItem('employees', JSON.stringify(employees));
+
 
             // Display details on acknowledgment screen
             document.getElementById('empId').textContent = employeeId;

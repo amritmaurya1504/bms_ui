@@ -11,7 +11,7 @@
 <body>
     <div class="container" id="loginForm">
         <h2>Employee Login</h2>
-        <form onsubmit="login(event)" class="grid-form"> 
+        <form onsubmit="login(event)" class="grid-form">
 
             <div class="grid-full">
                 <label for="empId">Employee ID</label>
@@ -26,7 +26,7 @@
             <p class="error" id="errorMessage"></p>
             <p class="success" id="successMessage"></p>
 
-            <button type="submit" class="grid-full" onclick="window.location.href='Home.html'">Login</button>
+            <button type="submit" class="grid-full">Login</button>
         </form>
 
         <div class="register">
@@ -36,7 +36,7 @@
 
     <!-- Acknowledgment Screen -->
 
-    <div class="success-card" id="acknowledgmentScreen" style="display: none;" >
+    <div class="success-card" id="acknowledgmentScreen" style="display: none;">
         <div class="icon">
             <span>✔</span>
         </div>
@@ -47,38 +47,41 @@
     <script>
         function login(event) {
             event.preventDefault();
-    
+
             const empId = document.getElementById('empId').value.trim();
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('errorMessage');
             const successMessage = document.getElementById('successMessage');
-    
+
             errorMessage.textContent = "";
             successMessage.textContent = "";
 
-    
-            // Validate Employee ID format (7-digit auto-generated ID)
-            const empIdPattern = /^EMP\d{4}$/;
-            if (!empIdPattern.test(empId)) {
-                errorMessage.textContent = "Invalid Employee ID format. Example: EMP1234";
+
+            // Retrieve stored employees from localStorage
+            const employees = JSON.parse(localStorage.getItem('employees')) || [];
+
+            // Find employee with matching ID and password
+            const employee = employees.find(emp => emp.employeeId === empId && emp.password === password);
+
+            if (!employee) {
+                errorMessage.textContent = "Invalid Employee ID or Password.";
                 return;
             }
-    
-            // Validate password length
-            if (password.length < 6) {
-                errorMessage.textContent = "Password must be at least 6 characters.";
-                return;
-            }
-    
-            successMessage.textContent = "Login successful!";
-    
+
+            // Store logged-in employee in sessionStorage
+            sessionStorage.setItem('loggedInEmployee', JSON.stringify(employee));
+
+            successMessage.textContent = "Login successful! Redirecting...";
+
             // Redirect to home page after 2 seconds
-            // setTimeout(() => {
-            //     window.location.href = "home.html"; // Change to your actual home page
-            // }, 2000);
+            setTimeout(() => {
+                window.location.href = "Home.html"; // Change to your actual home page
+            }, 2000);
+
+
         }
     </script>
-    
+
 </body>
 
 </html>

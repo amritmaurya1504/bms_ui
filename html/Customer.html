@@ -173,25 +173,152 @@
     </div>
 
     <script>
-        document.getElementById("addCustomerBtn").addEventListener("click", function () {
+        document.addEventListener("DOMContentLoaded", function () {
+            loadCustomers(); // Load existing customers from localStorage
+    
+            document.getElementById("addCustomerBtn").addEventListener("click", function () {
+                document.getElementById("customerFormContainer").style.display = "block";
+                document.getElementById("customerList").style.display = "none";
+                document.getElementById("addCustomerBtn").style.display = "none";
+                document.getElementById("viewCustomersBtn").style.display = "inline-block";
+            });
+    
+            document.getElementById("viewCustomersBtn").addEventListener("click", function () {
+                document.getElementById("customerFormContainer").style.display = "none";
+                document.getElementById("customerList").style.display = "block";
+                document.getElementById("addCustomerBtn").style.display = "inline-block";
+                document.getElementById("viewCustomersBtn").style.display = "none";
+            });
+    
+            document.getElementById("customerForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                addCustomer();
+            });
+        });
+    
+        function generateUniqueSSN() {
+            let customers = JSON.parse(localStorage.getItem('customers')) || [];
+            let ssnNumbers = customers.map(c => c.ssn);
+            let newSSN;
+    
+            do {
+                newSSN = Math.floor(100000000 + Math.random() * 900000000); // 9-digit unique SSN
+            } while (ssnNumbers.includes(newSSN.toString()));
+    
+            return newSSN.toString();
+        }
+    
+        function addCustomer() {
+            const name = document.getElementById('name').value.trim();
+            const account = document.getElementById('account').value.trim();
+            const ifsc = document.getElementById('ifsc').value.trim();
+            const balance = document.getElementById('balance').value.trim();
+            const aadhaar = document.getElementById('aadhaar').value.trim();
+            const pan = document.getElementById('pan').value.trim();
+            const dob = document.getElementById('dob').value.trim();
+            const gender = document.getElementById('gender').value.trim();
+            const marital = document.getElementById('marital').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const ssn = generateUniqueSSN();
+    
+            if (!name || !account || !ifsc || !balance || !aadhaar || !pan || !dob || !gender || !marital || !email || !contact || !address) {
+                alert("All fields are required!");
+                return;
+            }
+    
+            let customer = {
+                ssn,
+                name,
+                account,
+                ifsc,
+                balance,
+                aadhaar,
+                pan,
+                dob,
+                gender,
+                marital,
+                email,
+                contact,
+                address
+            };
+    
+            let customers = JSON.parse(localStorage.getItem('customers')) || [];
+            customers.push(customer);
+            localStorage.setItem('customers', JSON.stringify(customers));
+    
+            alert("Customer Registered Successfully!");
+            document.getElementById("customerForm").reset();
+            loadCustomers();
+        }
+    
+        function loadCustomers() {
+            let customers = JSON.parse(localStorage.getItem('customers')) || [];
+            let table = `<tr>
+                        <th>SSN ID</th>
+                        <th>Name</th>
+                        <th>Account No</th>
+                        <th>IFSC</th>
+                        <th>Balance</th>
+                        <th>Aadhaar</th>
+                        <th>PAN</th>
+                        <th>DOB</th>
+                        <th>Actions</th>
+                    </tr>`;
+    
+            customers.forEach((customer, index) => {
+                table += `<tr>
+                        <td>${customer.ssn}</td>
+                        <td>${customer.name}</td>
+                        <td>${customer.account}</td>
+                        <td>${customer.ifsc}</td>
+                        <td>₹${customer.balance}</td>
+                        <td>${customer.aadhaar}</td>
+                        <td>${customer.pan}</td>
+                        <td>${customer.dob}</td>
+                        <td>
+                            <button class="editBtn" onclick="editCustomer(${index})">Edit</button>
+                            <button class="deleteBtn" onclick="deleteCustomer(${index})">Delete</button>
+                        </td>
+                    </tr>`;
+            });
+    
+            document.querySelector("#customerList table").innerHTML = table;
+        }
+    
+        function deleteCustomer(index) {
+            let customers = JSON.parse(localStorage.getItem('customers')) || [];
+            customers.splice(index, 1);
+            localStorage.setItem('customers', JSON.stringify(customers));
+            loadCustomers();
+        }
+    
+        function editCustomer(index) {
+            let customers = JSON.parse(localStorage.getItem('customers')) || [];
+            let customer = customers[index];
+    
+            document.getElementById("name").value = customer.name;
+            document.getElementById("account").value = customer.account;
+            document.getElementById("ifsc").value = customer.ifsc;
+            document.getElementById("balance").value = customer.balance;
+            document.getElementById("aadhaar").value = customer.aadhaar;
+            document.getElementById("pan").value = customer.pan;
+            document.getElementById("dob").value = customer.dob;
+            document.getElementById("gender").value = customer.gender;
+            document.getElementById("marital").value = customer.marital;
+            document.getElementById("email").value = customer.email;
+            document.getElementById("contact").value = customer.contact;
+            document.getElementById("address").value = customer.address;
+    
+            deleteCustomer(index); // Remove the old record so the new one can be added after updating
             document.getElementById("customerFormContainer").style.display = "block";
             document.getElementById("customerList").style.display = "none";
             document.getElementById("addCustomerBtn").style.display = "none";
             document.getElementById("viewCustomersBtn").style.display = "inline-block";
-        });
-
-        document.getElementById("viewCustomersBtn").addEventListener("click", function () {
-            document.getElementById("customerFormContainer").style.display = "none";
-            document.getElementById("customerList").style.display = "block";
-            document.getElementById("addCustomerBtn").style.display = "inline-block";
-            document.getElementById("viewCustomersBtn").style.display = "none";
-        });
-
-        document.getElementById("customerForm").addEventListener("submit", function (event) {
-            event.preventDefault();
-            alert("Customer Registration Successful!");
-        });
+        }
     </script>
+    
 </body>
 
 </html>
