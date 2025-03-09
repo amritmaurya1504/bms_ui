@@ -4,32 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Management System</title>
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="./css/landingPage.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <h1>Online Bank Management</h1>
-        <div class="nav-links">
-            <a href="./html/EmployeeLogin.html">Login</a>
-            <a href="./html/EmployeeRegistration.html">Register</a>
-            <a href="#">Hi, Guest</a>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="logo">Bank Management System</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section with 3 User Buttons -->
+    <section class="hero">
+        <div class="content">
+            <h1>Welcome to Bank Management System</h1>
+            <p>Select your role to continue:</p>
+            <div class="buttons">
+                <a href="./Customer/" class="btn customer">Customer</a>
+                <a href="./Employee/Login/" class="btn employee">Employee</a>
+                <a href="./Admin/" class="btn admin">Admin</a>
+            </div>
         </div>
-    </div>
-    
-    <!-- Main Content -->
-    <div class="main-content">
-        <h2>Welcome To Bank Management System</h2>
-        <p>Secure, fast, and easy-to-use banking experience at your fingertips. Manage transactions, loans, and much more with just a few clicks.</p>
-        <div class="buttons">
-            <a href="./html/EmployeeRegistration.html" class="registerBtn">Register</a>
-            <a href="./html/EmployeeLogin.html" class="loginBtn">Login</a>
-        </div>
-    </div>
-    
-    <!-- Footer -->
-    <div class="footer">
-        © Copyright 2025 | Online Bank Management | All Rights Reserved
-    </div>
+    </section>
+
 </body>
 </html>

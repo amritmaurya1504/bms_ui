@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Management System - Employee Dashboard</title>
+    <link rel="stylesheet" href="../../../../css/employee.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">🏦 Bank Management System</div>
+        <ul class="nav-links">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="menu-card">
+            <a href="../../" style="text-decoration: none;">
+                < Back </a>
+                    <span style="float: right;margin-right: 2rem;">
+                        <a href="../../" style="text-decoration: none;">Dashboard</a> |
+                        <a href="../../Application/New/" style="text-decoration: none;">New Application</a>
+                    </span>
+        </div>
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <section class="loan-table">
+                <h2>Recent Loan Applications</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Applicant Name</th>
+                            <th>Loan Type</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rahul Sharma</td>
+                            <td>Home Loan</td>
+                            <td>₹50,00,000</td>
+                            <td class="status approved">Approved</td>
+                        </tr>
+                        <tr>
+                            <td>Amit Kumar</td>
+                            <td>Car Loan</td>
+                            <td>₹12,00,000</td>
+                            <td class="status pending">Pending</td>
+                        </tr>
+                        <tr>
+                            <td>Priya Singh</td>
+                            <td>Personal Loan</td>
+                            <td>₹5,00,000</td>
+                            <td class="status rejected">Rejected</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+</body>
+
+</html>
